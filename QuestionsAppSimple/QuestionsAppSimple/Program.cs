@@ -18,6 +18,10 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
     scope.ServiceProvider.GetRequiredService<QuestionsContext>().Database.EnsureCreated();
 
+// Activate static files serving
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 // API Routes
 app.MapGet("api/questions", async (QuestionsContext context)
     => await context.Questions.ToListAsync());
